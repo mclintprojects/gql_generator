@@ -1,0 +1,29 @@
+require "rails_helper"
+
+module Mutations
+  RSpec.describe <%= name.camelize %>, type: :request do
+    describe "resolve" do
+      it "should do something" do
+      end
+    end
+
+    def data(response)
+      gql_response(response, "<%= name.camelize(:lower) %>")
+    end
+
+    def query(<%= "#{arguments.pluck(:name).join(", ")}" %>)
+      <<~GQL
+        mutation{
+          <%= name.camelize(:lower) %>(input: {<%= "#{arguments.pluck(:name).map{|argument| "#{argument.camelize(:lower)}: \"\#{#{argument}}\"" }.join(", ")}" %>}){
+            status
+            data
+            errors{
+              property
+              message
+            }
+          }
+        }
+      GQL
+    end
+  end
+end

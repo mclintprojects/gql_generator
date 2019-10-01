@@ -1,0 +1,5 @@
+module Types
+  class <%= name.camelize %>Type < Types::BaseObject
+    <%= fields.map{|argument| "field :#{field.name}, #{field.type}, null: #{field.null}" }.join("\n    ") %>
+  end
+end

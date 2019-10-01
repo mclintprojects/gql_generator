@@ -1,0 +1,10 @@
+module Mutations
+  class <%= name.camelize %> < Mutations::BaseMutation
+    <%= fields.map{|field| "field :#{field.name}, #{field.type}, null: #{field.null}" }.join("\n    ") %>
+    
+    <%= arguments.map{|argument| "argument :#{argument.name}, #{argument.type}, required: #{argument.required}" }.join("\n    ") %>
+
+    def resolve(params)
+    end
+  end
+end

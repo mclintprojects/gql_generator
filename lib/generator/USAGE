@@ -1,0 +1,22 @@
+Description:
+    Setups up various starter kits for GraphQL
+
+Example:
+    rails generate gql mutation_name --type --arguments --fields
+
+    * type -> object|input|mutation
+    * arguments -> name:type(id|string|int|bool|float|date|datetime|json):required(true|false)
+    * fields -> name:type(id|string|int|bool|float|date|datetime|json):null(true|false)
+
+    eg:
+    1. rails g gql create_meeting --type mutation --arguments title:string:true --fields title:string:true
+
+    This will create: app/graphql/mutations/create_meeting_mutation.rb
+
+    2. rails g gql meeting --type object --arguments title:string:true
+
+    This will create: app/graphql/mutations/meeting_type.rb
+
+    3. rails g gql meeting --type input --arguments title:string:true --fields title:string:true
+
+    This will create: app/graphql/mutations/meeting_input.rb

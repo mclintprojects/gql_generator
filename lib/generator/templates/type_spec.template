@@ -1,0 +1,24 @@
+require "rails_helper"
+
+RSpec.describe GraphqlController, type: :controller do
+  describe "perform query" do
+    it "should return something" do
+      post :execute, params: {query: query}
+      query_response = data(response)
+    end
+  end
+
+  def data(response)
+    gql_response(response, "<%= name.camelize(:lower).pluralize %>")
+  end
+
+  def query()
+    <<~GQL
+      query{
+        <%= name.camelize(:lower).pluralize %>{
+          <%= arguments.pluck(:name).join("\n          ") %>
+        }
+      }
+    GQL
+  end
+end
