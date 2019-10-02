@@ -1,5 +1,5 @@
 Gem::Specification.new do |s|
-  s.name        = "gql-generator"
+  s.name        = "gql_generator"
   s.version     = "0.1"
   s.platform    = "ruby"
   s.authors     = ["Clinton Mbah"]

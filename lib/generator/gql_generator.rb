@@ -1,4 +1,4 @@
-require 'rails/generators/base'
+require 'rails/generators'
 
 class GqlGenerator < Rails::Generators::Base
   source_root File.expand_path("templates", __dir__)
