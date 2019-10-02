@@ -16,7 +16,7 @@ RSpec.describe GraphqlController, type: :controller do
     <<~GQL
       query{
         <%= name.camelize(:lower).pluralize %>{
-          <%= fields.pluck(:name).camelize(:lower).join("\n          ") %>
+          <%= fields.pluck(:name).map{|name| name.camelize(:lower)}.join("\n          ") %>
         }
       }
     GQL
