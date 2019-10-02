@@ -14,7 +14,7 @@ module Mutations
     def query(<%= "#{arguments.pluck(:name).join(", ")}" %>)
       <<~GQL
         mutation{
-          <%= name.camelize(:lower) %>(input: {<%= "#{arguments.map{|argument| "#{argument.name.camelize(:lower)}: #{argument.should_quote? ? "\"" : ""}#{argument.name}#{argument.should_quote? ? "\"" : ""}" }.join(", ")}" %>}){
+          <%= name.camelize(:lower) %>(input: {<%= "#{arguments.map{|argument| "#{argument.name.camelize(:lower)}: #{argument.should_quote? ? "\"" : ""}\#{#{argument.name}}#{argument.should_quote? ? "\"" : ""}" }.join(", ")}" %>}){
             status
             data
             errors{
