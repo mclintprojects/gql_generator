@@ -43,7 +43,7 @@ class GqlGenerator < Rails::Generators::Base
   def generate_type_files
     ensure_required_params_present :fields, ->(){
       template "type_file.template",
-        "app/graphql/queries/#{name}_type.rb"
+        "app/graphql/types/#{name}_type.rb"
       template "type_spec.template",
         "spec/graphql/queries/#{name}_type_spec.rb"
     }
