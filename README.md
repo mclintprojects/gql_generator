@@ -14,6 +14,48 @@ def gql_response(response, mutation_name)
 end
 ```
 
+Create the following files
+
+```ruby
+# app/graphql/mutations/base_mutation.rb
+module Mutations
+  class BaseMutation < GraphQL::Schema::RelayClassicMutation
+    field :status, Integer, null: false
+    field :errors, [Types::ErrorType], null: true
+
+    protected
+
+    def respond(status, options = {})
+      options[:errors] = options[:error].present? ?
+        generate_errors(options[:error]) : nil
+
+      { status: status, **options }
+    end
+
+    private
+
+    def generate_errors(errors)
+      result = []
+      errors.each do |key, value|
+        result.push({property: key, message: value})
+      end
+
+      result
+    end
+  end
+end
+```
+
+```ruby
+# app/graphql/types/error_type.rb
+module Types
+  class ErrorType < Types::BaseObject
+    field :property, String, null: false
+    field :message, String, null: false
+  end
+end
+```
+
 ## Usage
 
 rails generate gql mutation_name --type --arguments --fields
