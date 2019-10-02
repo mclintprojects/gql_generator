@@ -6,6 +6,14 @@ A better Rails generator for GraphQL-Ruby.
 
 Add `'gem gql_generator'` to your development gem group.
 
+Add the following to the end of your spec/rails_helper.rb
+
+```ruby
+def gql_response(response, mutation_name)
+  JSON.parse(response.body)["data"][mutation_name]
+end
+```
+
 ## Usage
 
 rails generate gql mutation_name --type --arguments --fields
