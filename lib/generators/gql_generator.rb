@@ -32,28 +32,28 @@ class GqlGenerator < Rails::Generators::Base
   }.freeze
 
   def generate_mutation_files
-    if required_params_present :fields, :arguments
+    ensure_required_params_present :fields, :arguments, ->(){
       template "mutation_file.template",
         "app/graphql/mutations/#{name}.rb"
       template "mutation_spec.template",
         "spec/graphql/mutations/#{name}_spec.rb"
-    end
+    }
   end
 
   def generate_type_files
-    if required_params_present :fields
+    ensure_required_params_present :fields, ->(){
       template "type_file.template",
         "app/graphql/types/#{name}_type.rb"
       template "type_spec.template",
         "spec/graphql/types/#{name}_type_spec.rb"
-    end
+    }
   end
 
   def generate_input_file
-    if required_params_present :fields
+    ensure_required_params_present :fields, ->(){
       template "input_file.template",
         "app/graphql/input/#{name}_input.rb"
-    end
+    }
   end
 
   def arguments
@@ -62,20 +62,21 @@ class GqlGenerator < Rails::Generators::Base
       OpenStruct.new(
         name: argument_options[0],
         type: type_of(argument_options[1]),
-        required: argument_options[2] || "false"
+        required: argument_options[2] || "false",
+        should_quote?: !["int", "float", "boolean", "id"].include?(argument_options[1]),
       )
     end
   end
 
   def fields
     options[:fields].map do |field|
-        field_options = field.split(":")
-        OpenStruct.new(
-          name: field_options[0],
-          type: type_of(field_options[1]),
-          null: field_options[2] || "false"
-        )
-      end
+      field_options = field.split(":")
+      OpenStruct.new(
+        name: field_options[0],
+        type: type_of(field_options[1]),
+        null: field_options[2] || "false"
+      )
+    end
   end
 
   def type_of(type)
@@ -83,7 +84,7 @@ class GqlGenerator < Rails::Generators::Base
     TYPES.fetch(type.to_sym, "String")
   end
 
-  def ensure_required_params_present(*required_params)
+  def ensure_required_params_present(*required_params, callback)
     required_params_present = true
 
     required_params.each do |param|
@@ -93,7 +94,7 @@ class GqlGenerator < Rails::Generators::Base
       end
     end
 
-    required_params_present
+    callback.call unless !required_params_present
   end
 end
   

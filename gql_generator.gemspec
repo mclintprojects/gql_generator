@@ -4,6 +4,7 @@ Gem::Specification.new do |s|
   s.platform    = "ruby"
   s.authors     = ["Clinton Mbah"]
   s.email       = ["clintonmbah44@gmail.com"]
+  s.licenses    = "MIT"
   s.homepage    = "https://github.com/mclintproject/gql-generator"
   s.summary     = "A better Rails generator for GraphQL Ruby."
   s.description = "This generator will create types, mutations and their respective test files for you."
