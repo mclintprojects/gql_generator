@@ -62,7 +62,7 @@ class GqlGenerator < Rails::Generators::Base
       OpenStruct.new(
         name: argument_options[0],
         type: type_of(argument_options[1]),
-        required: argument_options[2] || "false",
+        required: argument_options[2] || "true",
         should_quote?: !["int", "float", "boolean", "id"].include?(argument_options[1]),
       )
     end
