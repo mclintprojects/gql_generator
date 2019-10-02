@@ -2,6 +2,10 @@
 
 A better Rails generator for GraphQL-Ruby.
 
+# Installation
+
+Add `'gem gql_generator'` to your development gem group.
+
 ## Usage
 
 rails generate gql mutation_name --type --arguments --fields
