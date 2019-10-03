@@ -4,7 +4,7 @@ module Mutations
   RSpec.describe GraphqlController, type: :controller do
     describe "<%= name.camelize %> mutation" do
       it "should do something" do
-        post "/graphql", params: {query: query(<%= "#{arguments.map{|argument| "#{argument.should_quote? ? "\"" : ""}\#{#{argument.name.upcase}}#{argument.should_quote? ? "\"" : ""}" }.join(", ")}" %>)}
+        post "/graphql", params: {query: query(<%= "#{arguments.map{|argument| "#{argument.should_quote? ? "\"" : ""}#{argument.name.upcase}#{argument.should_quote? ? "\"" : ""}" }.join(", ")}" %>)}
         mutation_response = data(response)
       end
     end
