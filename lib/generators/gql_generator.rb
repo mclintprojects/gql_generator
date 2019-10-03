@@ -52,7 +52,7 @@ class GqlGenerator < Rails::Generators::Base
   def generate_input_file
     ensure_required_params_present :fields, ->(){
       template "input_file.template",
-        "app/graphql/input/#{name}_input.rb"
+        "app/graphql/inputs/#{name}_input.rb"
     }
   end
 
