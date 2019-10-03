@@ -1,4 +1,4 @@
-module Types
+module Inputs
   class <%= name.camelize %>Input < Types::BaseInputObject
     <%= fields.map{|field| "field :#{field.name}, #{field.type}, null: #{field.null}" }.join("\n    ") %>
   end
