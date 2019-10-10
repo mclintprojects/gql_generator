@@ -32,7 +32,7 @@ class GqlGenerator < Rails::Generators::Base
   }.freeze
 
   def generate_mutation_files
-    ensure_required_params_present :fields, :arguments, ->(){
+    ensure_required_params_present :arguments, ->(){
       template "mutation_file.template",
         "app/graphql/mutations/#{name}.rb"
       template "mutation_spec.template",
@@ -50,7 +50,7 @@ class GqlGenerator < Rails::Generators::Base
   end
 
   def generate_input_file
-    ensure_required_params_present :fields, ->(){
+    ensure_required_params_present :arguments, ->(){
       template "input_file.template",
         "app/graphql/input/#{name}_input.rb"
     }

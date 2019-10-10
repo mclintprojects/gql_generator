@@ -1,5 +1,5 @@
 module Types
   class <%= name.camelize %>Input < Types::BaseInputObject
-    <%= fields.map{|field| "field :#{field.name}, #{field.type}, null: #{field.null}" }.join("\n    ") %>
+    <%= arguments.map{|field| "argument :#{argument.name}, #{argument.type}, required: #{argument.required}" }.join("\n    ") %>
   end
 end
