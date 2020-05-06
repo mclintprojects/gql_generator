@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = "gql_generator"
-  s.version     = "1.0.9"
+  s.version     = "1.0.10"
   s.platform    = "ruby"
   s.authors     = ["Clinton Mbah"]
   s.email       = ["clintonmbah44@gmail.com"]
